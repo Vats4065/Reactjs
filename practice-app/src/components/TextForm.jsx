@@ -6,11 +6,13 @@ export default function TextForm(props) {
   function setUpper() {
     let newName = data.toUpperCase();
     setData(newName);
+    props.handleAlert("converted in uppercase", "info");
   }
 
   function setLow() {
     let newCname = data.toLowerCase();
     setData(newCname);
+    props.handleAlert("converted in lowercase", "info");
   }
 
   return (
@@ -18,16 +20,18 @@ export default function TextForm(props) {
       <div className="mb-3 ">
         <label
           htmlFor="mytext"
-          className={`form-label text-${props.text === "light" ? "dark" : "white"}
+          className={`form-label text-${
+            props.text === "light" ? "dark" : "white"
+          }
         `}
         >
           {props.heading}
         </label>
 
         <textarea
-          className={`form-control bg-${props.textareaColor}  opacity-${props.text === "light" ? "100" : "50"} text-${
-            props.text === "light" ? "dark " : "white"
-          }`}
+          className={`form-control bg-${props.textareaColor}  opacity-${
+            props.text === "light" ? "100" : "50"
+          } text-${props.text === "light" ? "dark " : "white"}`}
           id="mybox"
           rows="3"
           value={data}
