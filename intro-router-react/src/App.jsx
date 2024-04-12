@@ -8,6 +8,7 @@ import Home from "./Components/Home";
 import Service from "./Components/Service";
 import User from "./Components/User";
 import GoBack from "./Components/GoBack";
+import Search from "./Components/Search";
 
 function App() {
   function name() {
@@ -16,7 +17,7 @@ function App() {
   return (
     <>
       <Menu></Menu>
-      <div className="container">
+      <div className="container mx-auto ">
         <Switch>
           <Route exact path={["/", "/home"]} component={Home} />
           <Route
@@ -27,7 +28,7 @@ function App() {
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/service" component={Service} />
           <Route exact path="/about" component={About} />
-
+          <Route exact path="/search" component={Search} />
           <Route exact path="/contact/name" component={name} />
           <Route component={Error}></Route>
         </Switch>

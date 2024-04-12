@@ -24,6 +24,16 @@ function Menu() {
               User
             </NavLink>
 
+
+            <NavLink
+              exact
+              activeClassName="active_class"
+              className="text-decoration-none "
+              to="/search"
+            >
+              Search
+            </NavLink>
+
             <NavLink
               exact
               activeClassName="active_class"
