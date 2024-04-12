@@ -1,10 +1,58 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 function Menu() {
   return (
     <>
-      <Link to="/">About Us</Link>
-      <Link to="/contact">Contact Us</Link>
+      <section className="bg-dark">
+        <div className="container ">
+          <nav className="d-flex justify-content-around py-1 fs-4">
+            <NavLink
+              exact
+              activeClassName="active_class"
+              className="text-decoration-none "
+              to="/"
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              exact
+              activeClassName="active_class"
+              className="text-decoration-none "
+              to="/user"
+            >
+              User
+            </NavLink>
+
+            <NavLink
+              exact
+              activeClassName="active_class"
+              className="text-decoration-none "
+              to="/service"
+            >
+              Service
+            </NavLink>
+
+            <NavLink
+              exact
+              activeClassName="active_class"
+              className="text-decoration-none "
+              to="/about"
+            >
+              About Us
+            </NavLink>
+
+            <NavLink
+              className="text-decoration-none "
+              exact
+              activeClassName="active_class"
+              to="/contact"
+            >
+              Contact Us
+            </NavLink>
+          </nav>
+        </div>
+      </section>
     </>
   );
 }
