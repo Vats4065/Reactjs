@@ -26,7 +26,8 @@ function App() {
     setData(dt);
   };
 
-  const handleClear = () => {
+  const handleClear = (e) => {
+    e.preventDefault();
     setId(0);
     setFname("");
     setLname("");
@@ -60,6 +61,7 @@ function App() {
     };
     dt.push(obj);
     setData(dt);
+    handleClear()
    
   };
 
