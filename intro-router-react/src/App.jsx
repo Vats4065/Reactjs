@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import About from "./Components/About";
 import Contact from "./Components/Contact";
 import Error from "./Components/Error";
@@ -30,7 +30,8 @@ function App() {
           <Route exact path="/about" component={About} />
           <Route exact path="/search" component={Search} />
           <Route exact path="/contact/name" component={name} />
-          <Route component={Error}></Route>
+          {/* <Route component={Error}></Route> */}
+          <Redirect to="/" />
         </Switch>
         <div className="mt-5">
           <GoBack />
