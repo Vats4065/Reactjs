@@ -60,7 +60,7 @@ function App() {
     };
     dt.push(obj);
     setData(dt);
-    handleClear()
+   
   };
 
   return (

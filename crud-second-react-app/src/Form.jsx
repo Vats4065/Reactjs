@@ -7,44 +7,59 @@ function Form() {
     lname: "",
   });
   const [data, setData] = useState([]);
-  const [firstname, setFname] = useState();
-  const [lastname, setLname] = useState();
+//   const [firstname, setFname] = useState("");
+//   const [lastname, setLname] = useState("");
+  const [Id, setId] = useState(0);
 
   const handleClear = () => {
-    setFname("");
-    setLname("");
+    setForm({ fname: "", lname: "" });
+    // setFname("");
+    // setLname("");
   };
 
   const handleChange = (e) => {
-    setForm(() => ({
-      ...form,
-      [e.target.name]: e.target.value,
+    const name = e.target.name;
+    const value = e.target.value;
+    setForm((prevState) => ({
+      ...prevState,
+      [name]: value,
     }));
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    const index = data.findIndex((item) => item.id === Id);
+
+    console.log("index", index);
+
+    const updatedData = [...data];
+    updatedData[index].dataOf.fname = form.fname;
+    updatedData[index].dataOf.lname = form.lname;
+    setData(updatedData);
+    handleClear();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setData([...data, { id: uuidv4(), ...form }]);
+    setData([...data, { id: uuidv4(), dataOf: form }]);
     handleClear();
   };
 
   const handleDelete = (id) => {
-    const dt = data.filter((item) => item.id !== id);
-    setData(dt);
+    const updatedData = data.filter((item) => item.id !== id);
+    setData(updatedData);
     handleClear();
   };
 
   const handleEdit = (id) => {
-    const ed = data.filter((item) => item.id === id);
-
-    setFname(ed[0].fname);
-    setLname(ed[0].lname);
+    const editItem = data.find((item) => item.id === id);
+    setId(id);
+    setForm(editItem.dataOf);
   };
 
-  console.log(data);
   return (
     <>
-      <form action="" onSubmit={handleSubmit}>
+      <form>
         <div className="form-group mb-3">
           <label htmlFor="exampleInputEmail1">Firstname</label>
           <input
@@ -52,8 +67,8 @@ function Form() {
             className="form-control"
             placeholder="Enter fname"
             name="fname"
+            value={form.fname}
             onChange={handleChange}
-            value={firstname}
             required
           />
         </div>
@@ -62,16 +77,22 @@ function Form() {
           <input
             type="text"
             className="form-control"
-            placeholder="Password"
+            placeholder="Lastname"
             name="lname"
+            value={form.lname}
             onChange={handleChange}
-            value={lastname}
             required
           />
         </div>
 
-        <button type="submit" className="btn btn-primary mt-3">
+        <button className="btn btn-primary mt-3" onClick={handleSubmit}>
           Add
+        </button>
+        <button className="btn btn-danger ms-3 mt-3" onClick={handleClear}>
+          Clear
+        </button>
+        <button className="btn btn-info ms-3 mt-3" onClick={handleUpdate}>
+          Update
         </button>
       </form>
 
@@ -84,34 +105,27 @@ function Form() {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => {
-            return (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{item.fname}</td>
-                <td>{item.lname}</td>
-                <td>
-                  <button
-                    className="btn btn-primary me-2"
-                    onClick={() => {
-                      handleEdit(item.id);
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => {
-                      handleDelete(item.id);
-                   
-                    }}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+          {data.map((item, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{item.dataOf.fname}</td>
+              <td>{item.dataOf.lname}</td>
+              <td>
+                <button
+                  className="btn btn-primary me-2"
+                  onClick={() => handleEdit(item.id)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => handleDelete(item.id)}
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>
