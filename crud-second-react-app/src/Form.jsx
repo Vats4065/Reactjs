@@ -43,7 +43,7 @@ function Form() {
     e.preventDefault();
     setData([...data, { id: uuidv4(), dataOf: form }]);
     handleClear();
-  };
+  }; 
 
   const handleDelete = (id) => {
     const updatedData = data.filter((item) => item.id !== id);
