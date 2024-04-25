@@ -19,11 +19,10 @@ function Menu() {
               exact
               activeClassName="active_class"
               className="text-decoration-none "
-              to="/user"
+              to="/product"
             >
-              User
+              Product
             </NavLink>
-
 
             <NavLink
               exact
